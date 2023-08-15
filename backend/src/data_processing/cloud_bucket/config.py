@@ -4,5 +4,9 @@ from backend.src.data_processing.cloud_bucket.constants import DEFAULT_FIREBASE_
 
 def load_credentials(filename=DEFAULT_FIREBASE_CONFIG):
 	# load firebase credentials
-	cred = credentials.Certificate(filename)
-	return cred
+	try:
+		cred = credentials.Certificate(filename)
+		return cred
+	except Exception as e:
+		# TODO change logging
+		print(e)
