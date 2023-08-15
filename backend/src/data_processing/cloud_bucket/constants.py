@@ -1,0 +1,9 @@
+DEFAULT_FIREBASE_CONFIG = '../config/firebase_config.json'
+
+DEFAULT_TEMP_FILENAME = 'temp.csv'
+DEFAULT_BUCKET_NAME = 'stocks-feature-info.appspot.com'
+DEFAULT_RAW_DATA_BLOB = 'raw-data/{}.csv'
+DEFAULT_EXTENDED_FEATURE_BLOB = 'extended-feature/{}.csv'
+
+RAW_DATA_DOWNLOAD_URI = "gs://" + DEFAULT_BUCKET_NAME + "/" + DEFAULT_RAW_DATA_BLOB
+EXTENDED_DATA_DOWNLOAD_URI = "gs://" + DEFAULT_BUCKET_NAME + "/" + DEFAULT_EXTENDED_FEATURE_BLOB
