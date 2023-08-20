@@ -73,8 +73,52 @@ def extract_bollinger_band(stock_data, window=30):
 
     return stock_data
 
+def extract_commodity_channel_index(stock_data, window=10):
 
+    df = stock_data
 
+    # Define the period for the moving average and constant multiplier
+    period = window
+    constant = 0.015
 
+    # Calculate typical price
+    df['TypicalPrice'] = (df['High'] + df['Low'] + df['Close']) / 3
 
-    
+    # Calculate the moving average of the typical price
+    df['MovingAverage'] = df['TypicalPrice'].rolling(window=period).mean()
+
+    # Calculate the mean deviation
+    df['MeanDeviation'] = df['TypicalPrice'].rolling(window=period).apply(lambda x: abs((x - x.mean())).mean(),
+                                                                          raw=True)
+
+    # Calculate CCI
+    df['CCI'] = (df['TypicalPrice'] - df['MovingAverage']) / (constant * df['MeanDeviation'])
+
+    df.drop(['TypicalPrice', 'MovingAverage', 'MeanDeviation'], axis=1, inplace=True)
+
+    return df
+
+def relative_strength_index(stock_data, window=14):
+    df = stock_data
+
+    # Define the period for RSI calculation
+    period = window
+
+    # Calculate price changes and gains/losses
+    df['PriceChange'] = df['Close'].diff()
+    df['Gain'] = df['PriceChange'].apply(lambda x: x if x > 0 else 0)
+    df['Loss'] = df['PriceChange'].apply(lambda x: abs(x) if x < 0 else 0)
+
+    # Calculate average gains and losses over the specified period
+    df['AvgGain'] = df['Gain'].rolling(window=period).mean()
+    df['AvgLoss'] = df['Loss'].rolling(window=period).mean()
+
+    # Calculate the relative strength (RS)
+    df['RS'] = df['AvgGain'] / df['AvgLoss']
+
+    # Calculate the relative strength index (RSI)
+    df['RSI'] = 100 - (100 / (1 + df['RS']))
+
+    df.drop(['RS', 'AvgGain', 'AvgLoss', 'PriceChange', 'Gain', 'Loss'], axis=1, inplace=True)
+
+    return df
