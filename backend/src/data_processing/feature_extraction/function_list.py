@@ -9,5 +9,7 @@ extract_function_list = [
 	extract_adx,
 	extract_roc,
 	extract_williams_percentage,
-	extract_stochastic_percentage
+	extract_stochastic_percentage,
+	extract_commodity_channel_index,
+	relative_strength_index
 ]
