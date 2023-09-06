@@ -17,5 +17,6 @@ class ExtractFeatures:
 			self._extended_feature = extract_feature(self._extended_feature)
 		upload_df_as_csv(self._extended_feature, self._ticker_symbol, type="extended")
 		return self._extended_feature
+	
 
 

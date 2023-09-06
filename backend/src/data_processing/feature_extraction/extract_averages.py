@@ -50,7 +50,7 @@ def extract_adx(stock_data, window = 14):
     stock_data['ADX'] = stock_data['DMI'].rolling(window=window).mean()
 
     # Drop intermediate columns
-    stock_data.drop(['High-Low', 'High-PrevClose', 'Low-PrevClose', 'TR', 'UpMove', 'DownMove', 'DI+', 'DI-', 'SmoothDI+', 'SmoothDI-', 'DX', 'DMI'], axis=1, inplace=True)
+    stock_data.drop(['High-Low', 'High-PrevClose', 'Low-PrevClose', 'TR', 'UpMove', 'DownMove', 'DI+', 'DI-', 'DX', 'DMI'], axis=1, inplace=True)
 
     return stock_data
 

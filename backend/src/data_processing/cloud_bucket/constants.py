@@ -1,4 +1,6 @@
-DEFAULT_FIREBASE_CONFIG = '../config/firebase_config.json'
+import os
+from pathlib import Path
+DEFAULT_FIREBASE_CONFIG = os.path.join(Path(__file__).parents[3], 'config/firebase_config.json')
 
 DEFAULT_TEMP_FILENAME = 'temp.csv'
 DEFAULT_BUCKET_NAME = 'stocks-feature-info.appspot.com'

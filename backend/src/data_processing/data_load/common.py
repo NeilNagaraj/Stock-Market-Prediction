@@ -5,7 +5,7 @@ from backend.src.data_processing.cloud_bucket.constants import DEFAULT_TEMP_FILE
 from backend.src.data_processing.cloud_bucket.firebase import FireBase
 from backend.src.data_processing.data_load.data_load_exceptions import DataUploadException
 
-
+DEFAULT_TEMP_FILENAME = 'temp.csv'
 
 def upload_df_as_csv(df, ticker_symbol, type="raw"):
     file = pd.DataFrame(df)
