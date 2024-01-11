@@ -1,0 +1,2 @@
+https://neptune.ai/blog/predicting-stock-prices-using-machine-learning
+https://www.simplilearn.com/tutorials/machine-learning-tutorial/stock-price-prediction-using-machine-learning
