@@ -22,4 +22,4 @@ async def predict_data(ticker: str, period: int = Query(1)):
     return predictions
 
 
-uvicorn.run(app, host="0.0.0.0", port=5002)
+# uvicorn.run(app, host="0.0.0.0", port=5002)
