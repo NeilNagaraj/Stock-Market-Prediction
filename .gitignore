@@ -3,3 +3,5 @@ data
 __pycache__
 stm
 config
+.gitsecret/keys/random_seed
+!*.secret
