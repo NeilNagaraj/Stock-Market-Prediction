@@ -1,10 +1,10 @@
 from datetime import datetime
 import pandas as pd
 import os
-from backend.src.data_processing.cloud_bucket.firebase import FireBase
-from backend.src.data_processing.feature_extraction.extract_all import ExtractFeatures
-from backend.src.data_processing.data_load.stock_data import StockDataLoad
-from backend.src.data_processing.data_load.common import DEFAULT_TEMP_FILENAME
+from src.data_processing.cloud_bucket.firebase import FireBase
+from src.data_processing.feature_extraction.extract_all import ExtractFeatures
+from src.data_processing.data_load.stock_data import StockDataLoad
+from src.data_processing.data_load.common import DEFAULT_TEMP_FILENAME
 
 
 def get_stock_data(ticker_symbol, raw=False, keep=False):

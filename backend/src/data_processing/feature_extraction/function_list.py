@@ -1,8 +1,8 @@
-from backend.src.data_processing.feature_extraction.extract_averages import *
-from backend.src.data_processing.feature_extraction.extract_percentages import *
-from backend.src.data_processing.feature_extraction.extract_momentum import *
-from backend.src.data_processing.feature_extraction.extract_regressive import *
-from backend.src.data_processing.feature_extraction.extract_trend import *
+from src.data_processing.feature_extraction.extract_averages import *
+from src.data_processing.feature_extraction.extract_percentages import *
+from src.data_processing.feature_extraction.extract_momentum import *
+from src.data_processing.feature_extraction.extract_regressive import *
+from src.data_processing.feature_extraction.extract_trend import *
 
 extract_function_list = [
 	extract_ma,
@@ -19,5 +19,6 @@ extract_function_list = [
 	extract_autoregression,
 	extract_buying_pressure,
 	extract_value_range,
-	extract_sdmi_pos_n_neg
+	extract_sdmi_pos_n_neg,
+	extract_ma7
 ]

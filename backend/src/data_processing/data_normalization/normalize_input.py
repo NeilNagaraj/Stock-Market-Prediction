@@ -1,19 +1,42 @@
-from backend.src.data_processing.data_load.load_stock_data import get_stock_data
+from src.data_processing.data_load.load_stock_data import get_stock_data
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
 
 
+class NormalizeLoadDataException(Exception):
+    def __init__(self):
+        pass
+
+
 class Normalize:
-	def __init__(self, ticker_symbol):
-		self._ticker_symbol = ticker_symbol
+    def __init__(self, ticker_symbol, recent=14, stock_data=None):
+        self._ticker_symbol = ticker_symbol
+        self._recent = recent
 
-	def min_max_normalize(self):
-		stock_data = get_stock_data(self._ticker_symbol)
-		stock_data_columns = stock_data.columns
-		stock_data_cleaned = stock_data.dropna().filter(stock_data_columns[5:])
-		scaler = MinMaxScaler(feature_range=(0, 1))
+        if stock_data is None:
+            try:
+                self._stock_data = get_stock_data(self._ticker_symbol, keep=False)
 
-		stock_data_normalized = scaler.fit_transform(stock_data_cleaned)
-		return stock_data_normalized, scaler
+                self._stock_data_columns = self._stock_data.columns
+                self._stock_data = self._stock_data.dropna().filter(
+                    self._stock_data_columns[5:]
+                )
 
+            except Exception as e:
+                raise NormalizeLoadDataException(
+                    "Error while getting stock data:\t" + e
+                )
+        else:
+            self._stock_data = stock_data
 
+    @property
+    def stock_data(self):
+        return self._stock_data
+
+    def min_max_normalize(self, get_recent=False):
+        if get_recent:
+            self._stock_data = self._stock_data[-self._recent :]
+        scaler = MinMaxScaler(feature_range=(0, 1))
+
+        stock_data_normalized = scaler.fit_transform(self._stock_data)
+        return stock_data_normalized, scaler

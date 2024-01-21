@@ -1,10 +1,16 @@
 import numpy as np
-from backend.src.data_processing.data_normalization.normalize_input import Normalize
+
+from src.config_reader.config_reader import ConfigReader
+from src.data_processing.data_normalization.normalize_input import Normalize
 
 
-def extract_training_test_data(ticker_symbol, sequence_len=14):
+def extract_training_test_data(ticker_symbol):
+	config = ConfigReader().get()
+	train_set_ratio = float(config["train_model"]["train_set_ratio"])
+	sequence_len = int(config["train_model"]["sequence_len"])
+
 	data_set, scaler = Normalize(ticker_symbol).min_max_normalize()
-	training_data_len = int(np.ceil( len(data_set) * .95))
+	training_data_len = int(np.ceil(len(data_set) * train_set_ratio))
 	train_data = data_set[0:int(training_data_len), :]
 	# Split the data into x_train and y_train data sets
 	x_train = []

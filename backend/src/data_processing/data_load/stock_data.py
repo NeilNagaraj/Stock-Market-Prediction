@@ -3,9 +3,9 @@ from datetime import datetime
 import logging
 import pandas as pd
 import yfinance as yf
-from backend.src.data_processing.cloud_bucket.firebase import FireBase
-from backend.src.data_processing.data_load.common import upload_df_as_csv
-from backend.src.data_processing.data_load.data_load_exceptions import DataDownloadException, DataUploadException
+from src.data_processing.cloud_bucket.firebase import FireBase
+from src.data_processing.data_load.common import upload_df_as_csv
+from src.data_processing.data_load.data_load_exceptions import DataDownloadException, DataUploadException
 
 
 class StockDataLoad:

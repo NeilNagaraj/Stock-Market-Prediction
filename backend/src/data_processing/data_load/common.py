@@ -1,15 +1,14 @@
 import os
 import pandas as pd
 
-from backend.src.data_processing.cloud_bucket.constants import DEFAULT_TEMP_FILENAME
-from backend.src.data_processing.cloud_bucket.firebase import FireBase
-from backend.src.data_processing.data_load.data_load_exceptions import DataUploadException
+from src.data_processing.cloud_bucket.constants import DEFAULT_TEMP_FILENAME
+from src.data_processing.cloud_bucket.firebase import FireBase
+from src.data_processing.data_load.data_load_exceptions import DataUploadException
 
-DEFAULT_TEMP_FILENAME = 'temp.csv'
 
 def upload_df_as_csv(df, ticker_symbol, type="raw"):
     file = pd.DataFrame(df)
-    file.to_csv(DEFAULT_TEMP_FILENAME.format(ticker_symbol))
+    file.to_csv(DEFAULT_TEMP_FILENAME.format(ticker_symbol, "data", "csv"))
     f = FireBase(ticker_symbol)
 
     upload = False
@@ -20,11 +19,3 @@ def upload_df_as_csv(df, ticker_symbol, type="raw"):
 
     if not upload:
         raise DataUploadException(ticker_symbol)
-    try:
-        if os.path.exists(DEFAULT_TEMP_FILENAME):
-            os.remove(DEFAULT_TEMP_FILENAME)
-    except Exception as e:
-        # TODO change logging
-        print(e)
-
-
